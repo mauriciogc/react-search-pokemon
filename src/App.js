@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import "./App.css"; //Change extension
 import { ThemeProvider } from "react-jss";
 
 import useFetch from "./Hooks/useFetch";
+
+import Loading from "./Components/Loading";
 
 const theme = {
 	light: {
@@ -57,13 +59,19 @@ function App() {
         fullImg: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`
       };
     });
-
-    console.log(data);
   }
 
 	return (
 		<ThemeProvider theme={{ theme: theme[typeTheme], toogleTheme }}>
-			<div className="App"></div>
+			<div className="App">
+      {loading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            Se han cargado los datos!
+          </Fragment>
+        )}
+      </div>
 		</ThemeProvider>
 	);
 }
