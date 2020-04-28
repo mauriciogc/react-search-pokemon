@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import { createUseStyles } from "react-jss";
+import Form from "./Form";
 
 const useStyle = createUseStyles(({ theme }) => ({
 	container: {
@@ -20,6 +21,13 @@ const useStyle = createUseStyles(({ theme }) => ({
 }));
 
 const reducerList = (state, action) => {
+	switch (action.type) {
+		case "SEARCH":
+			console.log(action);
+			break;
+		default:
+			break;
+	}
 	return state;
 };
 
@@ -35,7 +43,7 @@ const Container = ({ items }) => {
 	return (
 		<div className={classes.container}>
 			<div>
-				Formulario
+				<Form handleEvent={dispatchList} />
 				<br />
 				Card
 			</div>
