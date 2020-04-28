@@ -20,15 +20,35 @@ const useStyle = createUseStyles(({ theme }) => ({
 	},
 }));
 
+const a = {
+	search: ["pikachuu"],
+	indexCurrent: 0,
+	itemCurrent: { name: "no matches" },
+};
+
 const reducerList = (state, action) => {
+	let newState = {};
+
 	switch (action.type) {
 		case "SEARCH":
-			console.log(action);
+			const search = [...state.search, action.name];
+			const indexCurrent = search.length - 1;
+
+			const pokemon = state.items.findIndex(
+				(item) => item.name.toUpperCase() === action.name.toUpperCase()
+			);
+
+			newState = {
+				search,
+				indexCurrent,
+				itemCurrent: state.items[pokemon] || { name: "no matches" },
+			};
 			break;
 		default:
 			break;
 	}
-	return state;
+	console.log(newState);
+	return { ...state, ...newState };
 };
 
 const Container = ({ items }) => {
