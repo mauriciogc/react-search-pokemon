@@ -4,6 +4,11 @@ import { createUseStyles, useTheme } from "react-jss";
 import icon from "../assets/roll.png";
 
 const useStyle = createUseStyles(({ theme }) => ({
+	"@global": {
+		html: {
+			backgroundColor: theme.background,
+		},
+	},
 	container: {
 		backgroundColor: theme.quaternary,
 		color: theme.color,
