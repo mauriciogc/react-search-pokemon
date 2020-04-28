@@ -8,6 +8,7 @@ import useFetch from "./Hooks/useFetch";
 //Components
 import Loading from "./Components/Loading";
 import Header  from "./Components/Header";
+import Container from "./Components/Container";
 
 const theme = {
 	light: {
@@ -72,6 +73,7 @@ function App() {
         ) : (
           <Fragment>
             <Header />
+            <Container items={data}/>
           </Fragment>
         )}
       </div>
