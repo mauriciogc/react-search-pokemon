@@ -1,10 +1,13 @@
 import React, { useState, Fragment } from "react";
-import "./App.css"; //Change extension
+import "./App.css";
 import { ThemeProvider } from "react-jss";
 
+//Hooks
 import useFetch from "./Hooks/useFetch";
 
+//Components
 import Loading from "./Components/Loading";
+import Header  from "./Components/Header";
 
 const theme = {
 	light: {
@@ -42,7 +45,7 @@ const theme = {
 };
 
 function App() {
-	const [typeTheme, setTypeTheme] = useState("dark");
+	const [typeTheme, setTypeTheme] = useState("light");
 	const toogleTheme = () => {
 		setTypeTheme(typeTheme === "light" ? "dark" : "light");
   };
@@ -68,7 +71,7 @@ function App() {
           <Loading />
         ) : (
           <Fragment>
-            Se han cargado los datos!
+            <Header />
           </Fragment>
         )}
       </div>
