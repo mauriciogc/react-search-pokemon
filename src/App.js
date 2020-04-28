@@ -1,4 +1,4 @@
-import React,  {useState} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css"; //Change extension
 
 import { ThemeProvider } from "react-jss";
@@ -39,15 +39,36 @@ const theme = {
 };
 
 function App() {
-  const [typeTheme, setTypeTheme] = useState("dark");
-
-  const toogleTheme = () => {
-    setTypeTheme(typeTheme === "light" ? "dark" : "light");
-  };
+	const [typeTheme, setTypeTheme] = useState("dark");
+	const [pokemonList, setPokemonList] = useState("dark");
+	const toogleTheme = () => {
+		setTypeTheme(typeTheme === "light" ? "dark" : "light");
+	};
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=807");
+				const json = await res.json();
+        const list = json.results.map((item, index) => {
+          const id = (index + 1).toString().padStart(3, 0);
+          return {
+            ...item,
+            id,
+            img: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`,
+            fullImg: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`
+          };
+        });
+        setPokemonList(list);
+			} catch (error) {
+				console.log("-->", error);
+			}
+		};
+		fetchData();
+	}, [setPokemonList]);
 
 	return (
 		<ThemeProvider theme={{ theme: theme[typeTheme], toogleTheme }}>
-			<div className="App"></div>
+			<div className="App">{JSON.stringify(pokemonList)}</div>
 		</ThemeProvider>
 	);
 }
