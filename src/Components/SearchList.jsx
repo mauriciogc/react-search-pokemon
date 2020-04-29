@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles(({ theme }) => ({
@@ -52,17 +52,28 @@ const useStyles = createUseStyles(({ theme }) => ({
 
 const SearchList = ({ list, handleEvent, indexCurrent }) => {
 	const classes = useStyles();
-
+	const handlerPrev = useCallback(
+		(e) => {
+			e.preventDefault();
+			handleEvent({ type: "PREV" });
+		},
+		[handleEvent]
+	);
+	const handlerNext = useCallback(
+		(e) => {
+			e.preventDefault();
+			handleEvent({ type: "NEXT" });
+		},
+		[handleEvent]
+	);
+	const handlerGoto = useCallback(
+		(e) => {
+			const index = Number(e.target.dataset.index);
+			handleEvent({ type: "GOTO", index });
+		},
+		[handleEvent]
+	);
 	if (!list.length) return null;
-
-	const handlerPrev = (e) => {
-		e.preventDefault();
-		handleEvent({ type: "PREV" });
-	};
-	const handlerNext = (e) => {
-		e.preventDefault();
-		handleEvent({ type: "NEXT" });
-	};
 
 	return (
 		<div className={classes.container}>
@@ -86,7 +97,8 @@ const SearchList = ({ list, handleEvent, indexCurrent }) => {
 					<li
 						className={index === indexCurrent ? "active" : ""}
 						key={index}
-						onClick={(e) => handleEvent({ type: "GOTO", index })}
+						data-index={index}
+						onClick={handlerGoto}
 					>
 						{item}
 					</li>

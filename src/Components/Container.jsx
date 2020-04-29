@@ -55,7 +55,6 @@ const reducerList = (state, action) => {
 		default:
 			break;
 	}
-	console.log(newState);
 	return { ...state, ...newState };
 };
 

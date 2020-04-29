@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles(({ theme }) => ({
@@ -24,18 +24,22 @@ const useStyles = createUseStyles(({ theme }) => ({
 		},
 	},
 }));
+
 const Form = ({ handleEvent }) => {
 	const classes = useStyles();
 	const inputNameRef = useRef();
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = useCallback(
+		(e) => {
+			e.preventDefault();
 
-		const name = inputNameRef.current.value;
-		if (name.trim()) {
-			handleEvent({ type: "SEARCH", name });
-		}
-	};
-
+			const name = inputNameRef.current.value;
+			if (name.trim()) {
+				handleEvent({ type: "SEARCH", name });
+				inputNameRef.current.value = "";
+			}
+		},
+		[handleEvent]
+	);
 	return (
 		<form className={classes.container} onSubmit={handleSubmit}>
 			<div className={classes.fileInput}>
