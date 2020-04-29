@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { createUseStyles } from "react-jss";
 import Form from "./Form";
 import Card from "./Card";
+import SearchList from "./SearchList";
 
 const useStyle = createUseStyles(({ theme }) => ({
 	container: {
@@ -39,6 +40,15 @@ const reducerList = (state, action) => {
 				itemCurrent: state.items[pokemon] || { name: "no matches" },
 			};
 			break;
+		case "PREV":
+			console.log(action);
+			break;
+		case "NEXT":
+			console.log(action);
+			break;
+		case "GOTO":
+			console.log(action);
+			break;
 		default:
 			break;
 	}
@@ -61,7 +71,13 @@ const Container = ({ items }) => {
 				<Form handleEvent={dispatchList} />
 				<Card item={list.itemCurrent} />
 			</div>
-			<div>SearchList</div>
+			<div>
+				<SearchList
+					list={list.search}
+					indexCurrent={list.indexCurrent}
+					handleEvent={dispatchList}
+				/>
+			</div>
 		</div>
 	);
 };
