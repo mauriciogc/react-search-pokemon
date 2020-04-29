@@ -4,6 +4,8 @@ import Form from "./Form";
 import Card from "./Card";
 import SearchList from "./SearchList";
 
+import { findWord } from "../Helpers/helper";
+
 const useStyle = createUseStyles(({ theme }) => ({
 	container: {
 		display: "flex",
@@ -28,58 +30,26 @@ const reducerList = (state, action) => {
 	switch (action.type) {
 		case "SEARCH":
 			const search = [...state.search, action.name];
-			const indexCurrent = search.length - 1;
-
-			const pokemon = state.items.findIndex(
-				(item) => item.name.toUpperCase() === action.name.toUpperCase()
-			);
-
-			newState = {
-				search,
-				indexCurrent,
-				itemCurrent: state.items[pokemon] || { name: "no matches" },
-			};
+			const iCurrent = search.length - 1;
+			const detail = findWord(state.items, action.name, iCurrent);
+			newState = { search, ...detail };
 			break;
 		case "PREV":
 			if (state.indexCurrent > 0) {
-				const indexCurrent = state.indexCurrent - 1;
-				const pokemon = state.items.findIndex(
-					(item) =>
-						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
-				);
-
-				newState = {
-					indexCurrent,
-					itemCurrent: state.items[pokemon] || { name: "no matches" },
-				};
+				const iCurrent = state.indexCurrent - 1;
+				newState = findWord(state.items, state.search[iCurrent], iCurrent);
 			}
 			break;
 		case "NEXT":
 			if (state.indexCurrent < state.search.length - 1) {
-				const indexCurrent = state.indexCurrent + 1;
-				const pokemon = state.items.findIndex(
-					(item) =>
-						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
-				);
-
-				newState = {
-					indexCurrent,
-					itemCurrent: state.items[pokemon] || { name: "no matches" },
-				};
+				const iCurrent = state.indexCurrent + 1;
+				newState = findWord(state.items, state.search[iCurrent], iCurrent);
 			}
 			break;
 		case "GOTO":
 			{
-				const indexCurrent = action.index;
-				const pokemon = state.items.findIndex(
-					(item) =>
-						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
-				);
-
-				newState = {
-					indexCurrent,
-					itemCurrent: state.items[pokemon] || { name: "no matches" },
-				};
+				const iCurrent = action.index;
+				newState = findWord(state.items, state.search[iCurrent], iCurrent);
 			}
 			break;
 		default:
