@@ -41,13 +41,46 @@ const reducerList = (state, action) => {
 			};
 			break;
 		case "PREV":
-			console.log(action);
+			if (state.indexCurrent > 0) {
+				const indexCurrent = state.indexCurrent - 1;
+				const pokemon = state.items.findIndex(
+					(item) =>
+						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
+				);
+
+				newState = {
+					indexCurrent,
+					itemCurrent: state.items[pokemon] || { name: "no matches" },
+				};
+			}
 			break;
 		case "NEXT":
-			console.log(action);
+			if (state.indexCurrent < state.search.length - 1) {
+				const indexCurrent = state.indexCurrent + 1;
+				const pokemon = state.items.findIndex(
+					(item) =>
+						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
+				);
+
+				newState = {
+					indexCurrent,
+					itemCurrent: state.items[pokemon] || { name: "no matches" },
+				};
+			}
 			break;
 		case "GOTO":
-			console.log(action);
+			{
+				const indexCurrent = action.index;
+				const pokemon = state.items.findIndex(
+					(item) =>
+						item.name.toUpperCase() === state.search[indexCurrent].toUpperCase()
+				);
+
+				newState = {
+					indexCurrent,
+					itemCurrent: state.items[pokemon] || { name: "no matches" },
+				};
+			}
 			break;
 		default:
 			break;
