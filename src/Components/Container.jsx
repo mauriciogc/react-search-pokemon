@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { createUseStyles } from "react-jss";
 import Form from "./Form";
+import Card from "./Card";
 
 const useStyle = createUseStyles(({ theme }) => ({
 	container: {
@@ -19,12 +20,6 @@ const useStyle = createUseStyles(({ theme }) => ({
 		},
 	},
 }));
-
-const a = {
-	search: ["pikachuu"],
-	indexCurrent: 0,
-	itemCurrent: { name: "no matches" },
-};
 
 const reducerList = (state, action) => {
 	let newState = {};
@@ -64,8 +59,7 @@ const Container = ({ items }) => {
 		<div className={classes.container}>
 			<div>
 				<Form handleEvent={dispatchList} />
-				<br />
-				Card
+				<Card item={list.itemCurrent} />
 			</div>
 			<div>SearchList</div>
 		</div>
