@@ -1,4 +1,5 @@
 import React, { useReducer } from "react";
+import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 import Form from "./Form";
 import Card from "./Card";
@@ -82,6 +83,16 @@ const Container = ({ items }) => {
 			</div>
 		</div>
 	);
+};
+
+Container.propTypes = {
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string.isRequired,
+			img: PropTypes.string.isRequired,
+			fullImg: PropTypes.string,
+		}).isRequired
+	).isRequired,
 };
 
 export default Container;

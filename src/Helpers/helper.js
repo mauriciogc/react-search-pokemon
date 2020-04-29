@@ -8,7 +8,7 @@ const findWord = (items, name, indexCurrent) => {
 
 	return {
 		indexCurrent,
-		itemCurrent: items[index] || { name: "no matches" },
+		itemCurrent: items[index] || { name: "no matches", img:"" },
 	};
 };
 

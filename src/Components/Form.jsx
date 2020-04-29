@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from "react";
+import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles(({ theme }) => ({
@@ -52,6 +53,10 @@ const Form = ({ handleEvent }) => {
 			</div>
 		</form>
 	);
+};
+
+Form.propTypes = {
+	handleEvent: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles(({ theme }) => ({
@@ -106,6 +107,12 @@ const SearchList = ({ list, handleEvent, indexCurrent }) => {
 			</ul>
 		</div>
 	);
+};
+
+SearchList.propTypes = {
+	list: PropTypes.arrayOf(PropTypes.string).isRequired,
+	handleEvent: PropTypes.func.isRequired,
+	indexCurrent: PropTypes.number.isRequired,
 };
 
 export default SearchList;

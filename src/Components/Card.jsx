@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { createUseStyles } from "react-jss";
 import Img from "react-image";
 import loading from "../assets/loading.gif";
@@ -40,6 +41,14 @@ const Card = ({ item }) => {
 			</div>
 		</div>
 	);
+};
+
+Card.propTypes = {
+	item: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		img: PropTypes.string.isRequired,
+		fullImg: PropTypes.string,
+	}),
 };
 
 export default Card;
