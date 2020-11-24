@@ -4,7 +4,7 @@
 
 
 ## You can see the tutorial here
---- Coming soon ---
+[Creando la app search pokemon con create-react-app, estilos con react-jss y hooks](https://mauriciogc.medium.com/react-creando-la-app-search-pok%C3%A9mon-con-create-react-app-estilos-con-react-jss-y-hooks-2377bf1507ed)
 
 ## You can see a live demo here
 * [Pokemon github pages](https://mauriciogc.github.io/react-search-pokemon/)
